@@ -33,39 +33,38 @@ int memorygame()
 {
     std::list<int> numbers;    
     std::list<int>::iterator it;
-    it = numbers.begin();  // this just introduces the list that stores the numbers
-    int score = 0;
-    while (true)
-    {    string x = "";
-         numbers.insert(it,random());
+    it = numbers.begin();  // this just introduces the list that stores the numbers that you have to remember
+    int score = 0;  // introduces score variable
+    while (true)   // this means that the game goes on until you remember wrong
+    {    string x = "";    
+         numbers.insert(it,random());  //puts the numbers from random number generator to the list
          for (auto v : numbers)
             {
-
-               string b = to_string(v);
-               x.append(b);
+               string b = to_string(v); 
+               x.append(b);  // puts random numbers to string that matches your input
             }
          cout << "" <<endl;
-         cout << "Type all the numbers so far: " ;
+         cout << "Type all the numbers so far: " ; // introduces your input
          string y;
-         cin >> y;
+         cin >> y;  
 
-         if (y == x)
+         if (y == x)      // checks if you got it right
             {
-             for (int w = 0; w < 100; w++){
+             for (int w = 0; w < 100; w++){       // just a for loop, that means that you can't see the older numbers
                 cout << "no peeking" << endl;
              }
-             cout << "you got it right" << endl;
-             score++;
-             cout << "your score is: ";
+             cout << "you got it right" << endl; 
+             score++;   // adds to score
+             cout << "your score is: ";   // tells you score
              cout << score << endl;
 
-             continue;
+             continue;       // loops again, but with one more number
 
             }
          else {
             cout << "you got it wrong" << endl;
             cout << "it was " + x << endl;
-            break;
+            break;      // breaks the script, as you got it wrong, and tells you what it is
             }
 
     }
@@ -73,5 +72,5 @@ int memorygame()
 
 int main()
 {
-    memorygame();
+    memorygame();    // calls the memory game function
 }
