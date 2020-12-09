@@ -2,7 +2,7 @@
 #include <list>
 #include <ctime>
 #include <cstdlib>
-#include <stdlib.h>
+#include <stdlib.h>  // these are just importing libraries to run the program
 #include <time.h>
 #include <stdio.h>
 #include <list>
@@ -23,17 +23,17 @@ int random()
         { /* bad value retrieved so get next one */ }
 
         cout << n % 9 + 1;
-        return (n % 9 + 1);
-    }
-
+        return (n % 9 + 1);  // this is a sudo-random number generator, that I found on stackoverflow. I'm
+    }                        // not fully sure how it works, but I think it gets random numbers by accessing time
+                             // I modified it so that it only returns one number
 
 }
 
 int memorygame()
 {
-    std::list<int> numbers;
+    std::list<int> numbers;    
     std::list<int>::iterator it;
-    it = numbers.begin();
+    it = numbers.begin();  // this just introduces the list that stores the numbers
     int score = 0;
     while (true)
     {    string x = "";
