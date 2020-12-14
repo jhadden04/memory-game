@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <list>
 using namespace std;
-
+// definitely the right code
 int random()
 {
     unsigned long j;
