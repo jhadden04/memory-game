@@ -2,7 +2,7 @@
 #include <list>
 #include <ctime>
 #include <cstdlib>
-#include <stdlib.h>  // these are just importing libraries to run the program
+#include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
 #include <list>
@@ -23,48 +23,49 @@ int random()
         { /* bad value retrieved so get next one */ }
 
         cout << n % 9 + 1;
-        return (n % 9 + 1);  // this is a sudo-random number generator, that I found on stackoverflow. I'm
-    }                        // not fully sure how it works, but I think it gets random numbers by accessing time
-                             // I modified it so that it only returns one number
+        return (n % 9 + 1);
+    }
+
 
 }
 
 int memorygame()
 {
-    std::list<int> numbers;    
+    std::list<int> numbers;
     std::list<int>::iterator it;
-    it = numbers.begin();  // this just introduces the list that stores the numbers that you have to remember
-    int score = 0;  // introduces score variable
-    while (true)   // this means that the game goes on until you remember wrong
-    {    string x = "";    
-         numbers.insert(it,random());  //puts the numbers from random number generator to the list
+    it = numbers.begin();
+    int score = 0;
+    while (true)
+    {    string x = "";
+         numbers.insert(it,random());
          for (auto v : numbers)
             {
-               string b = to_string(v); 
-               x.append(b);  // puts random numbers to string that matches your input
+
+               string b = to_string(v);
+               x.append(b);
             }
          cout << "" <<endl;
-         cout << "Type all the numbers so far: " ; // introduces your input
+         cout << "Type all the numbers so far: " ;
          string y;
-         cin >> y;  
+         cin >> y;
 
-         if (y == x)      // checks if you got it right
+         if (y == x)
             {
-             for (int w = 0; w < 100; w++){       // just a for loop, that means that you can't see the older numbers
+             for (int w = 0; w < 100; w++){
                 cout << "no peeking" << endl;
              }
-             cout << "you got it right" << endl; 
-             score++;   // adds to score
-             cout << "your score is: ";   // tells you score
+             cout << "you got it right" << endl;
+             score++;
+             cout << "your score is: ";
              cout << score << endl;
 
-             continue;       // loops again, but with one more number
+             continue;
 
             }
          else {
             cout << "you got it wrong" << endl;
             cout << "it was " + x << endl;
-            break;      // breaks the script, as you got it wrong, and tells you what it is
+            break;
             }
 
     }
@@ -72,5 +73,9 @@ int memorygame()
 
 int main()
 {
-    memorygame();    // calls the memory game function
+    memorygame();
 }
+
+
+
+
