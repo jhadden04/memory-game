@@ -1,3 +1,4 @@
+
 void turn_on_light(int ledpin_number, int time_on)
 {
   digitalWrite(ledpin_number, HIGH);
@@ -11,14 +12,18 @@ void turn_off_light(int pin_number, int time_off)
   delay(time_off);
 }
 
+void turn_off_all_lights()
+{
+    for (int i = 0; i < 14; i++)
+    {
+    digitalWrite(i, LOW);
+    }
+}
 void button_functionality(button_pin, led_pin)
 {
   if (digitalRead(button_pin) == HIGH)
   {
-      for (int i = 0; i < 14; i++)
-    {
-    digitalWrite(i, LOW);
-    }
+    turn_off_all_lights();
     digitalWrite(led_pin, HIGH);
     
   } 
@@ -68,9 +73,7 @@ void setup()
     }
     if (digitalRead(10) == HIGH)
     {
-      digitalWrite(13, LOW);
-      Serial.print("11 ");
-      digitalWrite(11, HIGH);
+      button_functionality(10, 11);
       button_sim[z] = 12;
       z++;
       continue;
@@ -78,8 +81,7 @@ void setup()
     
     if (digitalRead(9) == HIGH)
     {
-      digitalWrite(13, LOW);
-      digitalWrite(11, LOW);
+      turn_off_all_lights();
       break;
     }
     if (button_sim[100] == lights_sim[100])
