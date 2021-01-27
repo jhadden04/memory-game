@@ -1,3 +1,9 @@
+int random_number(int num1, int num2)
+{
+  randomSeed(analogRead(0));
+  return random(num1, num2);
+  
+}
 
 void turn_on_light(int ledpin_number, int time_on)
 {
@@ -18,29 +24,24 @@ void turn_off_all_lights()
     {
     digitalWrite(i, LOW);
     }
+  
 }
-void button_functionality(button_pin, led_pin)
+void button_functionality(int led_pin)
 {
-  if (digitalRead(button_pin) == HIGH)
-  {
-    turn_off_all_lights();
-    digitalWrite(led_pin, HIGH);
     
-  } 
+    digitalWrite(led_pin, HIGH);
+    delay(400);
+    turn_off_all_lights();
 }
   
 
-int rand_int()
-{
-  return random(1,3);
-}
+
+
 void setup()
 { 
-  Serial.begin(9600);
-  
-  randomSeed(20);
-  int lights_sim[100] = {11};
-  int button_sim[100];
+  Serial.begin(9600); 
+  int lights_sim[1] = {11};
+  int button_sim[0];
   // button_sim[0] = rand_int();
   // Serial.print(button_sim[0]);
   
@@ -54,49 +55,41 @@ void setup()
     for (int i = 0; i < sizeof(lights_sim); i++)
   {
     turn_on_light(lights_sim[i], 1000);   // this is for the output system
-    turn_off_light(lights_sim[i], 200);
+    turn_off_light(lights_sim[i], 100);
     
   }
   
   
   
-  
+  int z = 0;
   while (true)
   {
     delay(100);
     if (digitalRead(12) == HIGH)
-    {
-      button_functionality(12, 13);
+    { 
+      //Serial.print(13);
+      
+      button_functionality(13);
       button_sim[z] = 13; 
       z++;
       continue;
     }
     if (digitalRead(10) == HIGH)
     {
-      button_functionality(10, 11);
-      button_sim[z] = 12;
+      button_functionality(11);
+      button_sim[z] = 11;
       z++;
       continue;
     }
     
     if (digitalRead(9) == HIGH)
     {
+      Serial.print("we're out ");
       turn_off_all_lights();
       break;
     }
-    if (button_sim[100] == lights_sim[100])
-    {
-      Serial.print("you won");
-    }
-    if (button_sim[100] != lights_sim[100])
-    {
-      Serial.print("you lose");
-    }
+
   }
-
-  
-
-  
   
 }
 
@@ -111,7 +104,7 @@ void loop()
   
   if (digitalRead(9) == HIGH)
   {
-    memory_game();
+    //memory_game();
   }
   
 }
