@@ -24,7 +24,6 @@ void turn_off_all_lights()
     {
     digitalWrite(i, LOW);
     }
-  
 }
 void button_functionality(int led_pin)
 {
@@ -35,76 +34,124 @@ void button_functionality(int led_pin)
 }
   
 
-
-
 void setup()
 { 
+  
   Serial.begin(9600); 
-  int lights_sim[1] = {11};
-  int button_sim[0];
-  // button_sim[0] = rand_int();
-  // Serial.print(button_sim[0]);
   
-  
-  pinMode(13, OUTPUT);
-  pinMode(11, OUTPUT);
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, OUTPUT); // these are the output lights
   pinMode(12, INPUT);
   pinMode(10, INPUT);
-  pinMode(9, INPUT);
+  pinMode(6, INPUT);
+  pinMode(7, INPUT);
+  pinMode(9, INPUT); // the insert button
+  pinMode(8, INPUT);  // the start button
+  pinMode(11, OUTPUT);  // the win light
+  pinMode(13, OUTPUT);  // the lose light
   
-    for (int i = 0; i < sizeof(lights_sim); i++)
+  
+  //memory_game();
+ 
+  
+}
+
+void memory_game()
+{
+  int lights_sim[100];
+  int button_sim[100];
+  int x = 1;
+  int score = 0;
+  while (true)
+  {
+    lights_sim[x] = {random_number(2,6)};
+    x++;
+    
+
+    for (int i = 0; i < x; i++)
   {
     turn_on_light(lights_sim[i], 1000);   // this is for the output system
-    turn_off_light(lights_sim[i], 100);
+    delay(400);
     
   }
   
-  
-  
+    
   int z = 0;
   while (true)
   {
     delay(100);
     if (digitalRead(12) == HIGH)
     { 
-      //Serial.print(13);
-      
-      button_functionality(13);
-      button_sim[z] = 13; 
+      button_functionality(2);
+      button_sim[z+1] = 2; 
       z++;
       continue;
     }
     if (digitalRead(10) == HIGH)
     {
-      button_functionality(11);
-      button_sim[z] = 11;
+      button_functionality(3);
+      button_sim[z+1] = 3;
+      z++;
+      continue;
+      
+    }
+    
+    if (digitalRead(6) == HIGH)
+    {
+      button_functionality(4);
+      button_sim[z+1] = 4;
+      z++;
+      continue;
+    }
+    
+     if (digitalRead(7) == HIGH)
+    {
+      button_functionality(5);
+      button_sim[z+1] = 5;
       z++;
       continue;
     }
     
     if (digitalRead(9) == HIGH)
     {
-      Serial.print("we're out ");
+      
       turn_off_all_lights();
       break;
     }
-
-  }
+   }
   
+    bool correct_inputs = true;
+    
+    for (int l = 0; l < x; l++)
+    { 
+      if (button_sim[l] != lights_sim[l])
+      {
+        turn_on_light(13, 2000);
+        correct_inputs = false;
+        break;
+      }
+    }
+    
+    if (correct_inputs)
+    {
+      turn_on_light(11, 2000);
+      
+      z++;
+    }
+    if (correct_inputs == false)
+    {
+      
+      break;
+    }
+  }
 }
-
-void memory_game()
-{
-}
-
-
 
 void loop()
 {
-  
-  if (digitalRead(9) == HIGH)
+  if (digitalRead(8 == LOW))
   {
-    //memory_game();
+    memory_game();
   }
-  
 }
