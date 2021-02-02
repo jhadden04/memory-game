@@ -159,7 +159,7 @@ void memory_game()  // the main memory game function
 
 void loop()
 {
-  if (digitalRead(8 == LOW))  // checks if the start button is pressed
+  if (digitalRead(8 == HIGH))  // checks if the start button is pressed
   {
     memory_game();   // starts the memory game
   }
